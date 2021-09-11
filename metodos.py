@@ -1,5 +1,7 @@
 import os
+import array
 from time import sleep
+from typing import Counter
 
 from ciudades import ciudades 
 
@@ -14,6 +16,7 @@ def imprimirCiudades():
     print('Lista de ciudades: ')
     for key in indices:
         print('>>> ' + key)
+        
     print('')
 
 
@@ -34,6 +37,8 @@ def busquedaDeCiudad(start):
     for key in indices:
         if indices[indice] == start:
             start = indice
+            city=key
+            
             isCityFounded = True
             break
         else:
@@ -42,6 +47,7 @@ def busquedaDeCiudad(start):
     # Se validad si la ciudad ha sido encontrada.
     if isCityFounded:
         print('¡La ciudad ha sido seleccionada con éxito!')
+        encontrarVecinoMasCercano(city)
     else:
         print('Parece que la ciudad solicitada no ha sido encontrada...')
         sleep(2)
@@ -50,7 +56,7 @@ def busquedaDeCiudad(start):
         busquedaDeCiudad(seleccionDeCiudadInicial())
 
 ciudadesVisitadas = []
-
+valor = 0
 i = 0
 
 def encontrarVecinoMasCercano(ciudadEnCuestion):
@@ -63,8 +69,17 @@ def encontrarVecinoMasCercano(ciudadEnCuestion):
             encontrarVecinoMasCercano(ciudadEnCuestion)
         elif ciudades[indices[0]][indices[3]]:
             # Algo de aqui para implementar si 
-            # https://www.mclibre.org/consultar/python/lecciones/python-for-2.html
-            print()
+            #ciudadesElegir = indices[key]
+            if len(ciudadesVisitadas)==0:
+                ciudadesVisitadas.append(ciudadEnCuestion)
+                print(ciudades[key].values())
+            elif  ciudades[indices[0]][indices[3]]:
+                endPrograma()
+            #ciudadesVisitadas.append(ciudadEnCuestion)
+            # https://www.mclibre.org/cciudades[indices[0]][indices[3]]:onsultar/python/lecciones/python-for-2.html
+
+            print(ciudadesVisitadas[0])
+            print(len(ciudades))
 
 def endPrograma():
     # Imprimir resultados
