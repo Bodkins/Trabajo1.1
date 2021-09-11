@@ -56,6 +56,7 @@ def busquedaDeCiudad(start):
         busquedaDeCiudad(seleccionDeCiudadInicial())
 
 ciudadesVisitadas = []
+ciudadesMenores = []
 valor = 0
 i = 0
 
@@ -65,22 +66,49 @@ def encontrarVecinoMasCercano(ciudadEnCuestion):
         endPrograma()
 
     for key in indices:
-        if ciudadEnCuestion == i:
-            encontrarVecinoMasCercano(ciudadEnCuestion)
-        elif ciudades[indices[0]][indices[3]]:
+        valCiud=[*ciudades[ciudadEnCuestion].values()]
+        ciud=[*ciudades[ciudadEnCuestion]]
+        #print(ciud)
+        #print(valCiud)
+        if ciudadEnCuestion != i:
+            
             # Algo de aqui para implementar si 
             #ciudadesElegir = indices[key]
             if len(ciudadesVisitadas)==0:
                 ciudadesVisitadas.append(ciudadEnCuestion)
-                print(ciudades[key].values())
+                ciudadesMenores= sorted(ciudades[ciudadEnCuestion].values())
+                inde=0
+                iv=0
+                ii=0
+                
+                while inde<=len(ciudadesMenores):
+                    
+                    while ciudadesMenores[iv]!= valCiud[inde]:
+                        inde=inde+1
+                        while ii<len(ciudadesVisitadas):
+                         entra = False
+                         if ciud[inde]==ciudadesVisitadas[ii]:
+                           entra=True
+                           valor=valor+valCiud[inde]
+                           ciudadEnCuestion=ciud[inde]
+                           ciudadesVisitadas.append(ciudadEnCuestion)
+                           print(ciudadEnCuestion)
+                           print(valor)
+                           encontrarVecinoMasCercano(ciudadEnCuestion)
+                        ii=ii+1
+                    iv=iv+1
+                
+                inde=inde+1
+                
+                #print(ciudades[key])
             elif  ciudades[indices[0]][indices[3]]:
                 endPrograma()
             #ciudadesVisitadas.append(ciudadEnCuestion)
             # https://www.mclibre.org/cciudades[indices[0]][indices[3]]:onsultar/python/lecciones/python-for-2.html
 
-            print(ciudadesVisitadas[0])
-            print(len(ciudades))
+            #print(ciudadesVisitadas[0])
+            #print(len(ciudades))
 
 def endPrograma():
     # Imprimir resultados
-    print('xd')
+    print(valor)
